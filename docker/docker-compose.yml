@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  yolo_v8:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    runtime: nvidia
+    tty: true
+    user: $DOCKER_USER
+    shm_size: 16gb
+    environment:
+      - DISPLAY=${DISPLAY}
+      - NUMBA_CACHE_DIR=/tmp
+    volumes:
+      - ../:/ultralytics
+      - /tmp/.X11-unix:/tmp/.X11-unix
